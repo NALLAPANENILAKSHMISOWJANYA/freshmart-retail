@@ -2,8 +2,69 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
+
   prefix: "",
+
+  // ✅ SAFELIST (CRITICAL FIX)
+  safelist: [
+    "bg-gradient-to-r",
+
+    // Clothing
+    "from-purple-500",
+    "to-pink-500",
+
+    // Utensils
+    "from-orange-500",
+    "to-amber-500",
+
+    // Electronics
+    "from-blue-500",
+    "to-cyan-500",
+
+    // Makeup
+    "from-pink-500",
+    "to-rose-500",
+
+    // Food
+    "from-green-500",
+    "to-emerald-500",
+
+    // Snacks
+    "from-yellow-500",
+    "to-orange-500",
+
+    // Drinks
+    "from-cyan-500",
+    "to-blue-500",
+
+    // Meat
+    "from-red-500",
+    "to-rose-600",
+
+    // Chocolates
+    "from-amber-700",
+    "to-yellow-600",
+
+    // Vegetables
+    "from-green-600",
+    "to-lime-500",
+
+    // Fruits
+    "from-orange-500",
+    "to-red-500",
+
+    // Dairy (THIS was missing → white card issue)
+    "from-sky-400",
+    "to-blue-300",
+  ],
+
   theme: {
     container: {
       center: true,
@@ -12,18 +73,21 @@ export default {
         "2xl": "1400px",
       },
     },
+
     extend: {
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        telugu: ['Noto Sans Telugu', 'Poppins', 'sans-serif'],
-        hindi: ['Noto Sans Devanagari', 'Poppins', 'sans-serif'],
+        sans: ["Poppins", "sans-serif"],
+        telugu: ["Noto Sans Telugu", "Poppins", "sans-serif"],
+        hindi: ["Noto Sans Devanagari", "Poppins", "sans-serif"],
       },
+
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -52,23 +116,8 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Category specific colors
-        fresh: {
-          green: "hsl(var(--fresh-green))",
-          "green-light": "hsl(var(--fresh-green-light))",
-          "green-dark": "hsl(var(--fresh-green-dark))",
-        },
-        coral: {
-          DEFAULT: "hsl(var(--coral))",
-          light: "hsl(var(--coral-light))",
-        },
-        teal: {
-          DEFAULT: "hsl(var(--teal))",
-          light: "hsl(var(--teal-light))",
-        },
-        gold: "hsl(var(--gold))",
-        purple: "hsl(var(--purple))",
-        sky: "hsl(var(--sky))",
+
+        // Category colors
         category: {
           clothing: "hsl(var(--clothing-color))",
           utensils: "hsl(var(--utensils-color))",
@@ -83,17 +132,8 @@ export default {
           fruits: "hsl(var(--fruits-color))",
           dairy: "hsl(var(--dairy-color))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
       },
+
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -101,11 +141,13 @@ export default {
         "2xl": "1.25rem",
         "3xl": "1.5rem",
       },
+
       boxShadow: {
         fresh: "var(--shadow-md)",
         glow: "var(--shadow-glow)",
         "card-hover": "var(--shadow-card-hover)",
       },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -119,53 +161,20 @@ export default {
           from: { opacity: "0", transform: "translateY(20px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
-        "fade-in-up": {
-          from: { opacity: "0", transform: "translateY(30px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
         "scale-in": {
           from: { opacity: "0", transform: "scale(0.9)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
-        "slide-up": {
-          from: { opacity: "0", transform: "translateY(100%)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        "slide-in-right": {
-          from: { opacity: "0", transform: "translateX(100%)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-        "bounce-gentle": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-8px)" },
-        },
-        "pulse-ring": {
-          "0%": { transform: "scale(0.8)", opacity: "1" },
-          "100%": { transform: "scale(2)", opacity: "0" },
-        },
-        float: {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "50%": { transform: "translateY(-10px) rotate(2deg)" },
-        },
-        glow: {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(142, 76%, 36%, 0.3)" },
-          "50%": { boxShadow: "0 0 40px hsl(142, 76%, 36%, 0.6)" },
-        },
       },
+
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.6s ease-out forwards",
-        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "scale-in": "scale-in 0.5s ease-out forwards",
-        "slide-up": "slide-up 0.5s ease-out forwards",
-        "slide-in-right": "slide-in-right 0.4s ease-out forwards",
-        "bounce-gentle": "bounce-gentle 2s ease-in-out infinite",
-        "pulse-ring": "pulse-ring 1.5s ease-out infinite",
-        float: "float 4s ease-in-out infinite",
-        glow: "glow 2s ease-in-out infinite",
       },
     },
   },
+
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
