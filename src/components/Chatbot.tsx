@@ -5,6 +5,7 @@ import { X, Send, Bot } from 'lucide-react';
 import { categories, searchProducts, Product } from '@/data/products';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { askGemini } from '@/lib/gemini';
+import { searchService, SearchResult } from '@/data/searchService';
 const normalize = (text: string) =>
   text.toLowerCase().replace(/[?!.,]/g, '').trim();
 
@@ -22,7 +23,7 @@ interface Message {
   id: number;
   type: 'bot' | 'user';
   content: string;
-  products?: Product[];
+  results?: SearchResult[];
   isLoading?: boolean;
 }
 
@@ -88,6 +89,13 @@ const Chatbot = ({ onClose }: { onClose: () => void }) => {
   const { language } = useLanguage();
   const navigate = useNavigate();
 
+  // Import the legacy search for compatibility or replace it? 
+  // We'll use our new searchService. 
+  // Note: We need to import it. I will add the import at the top of the file in a separate edit or assume I can do it here if I replace the whole component. 
+  // Since I can't easily add imports with replace_file_content on a block, I should probably do a multi_replace or just replace the component and let the user/linter handle imports, OR I can use `multi_replace` to add the import too.
+  // Wait, I can't use `multi_replace` effectively if I'm replacing the whole component logic.
+  // I will use `replace_file_content` for the component logic.
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -97,81 +105,85 @@ const Chatbot = ({ onClose }: { onClose: () => void }) => {
   ]);
 
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
 
   const addMessage = (msg: Omit<Message, 'id'>) =>
     setMessages(prev => [...prev, { ...msg, id: Date.now() }]);
 
   const handleSend = async () => {
-  if (!input.trim()) return;
+    if (!input.trim()) return;
 
-  const userText = input;
-  const normalized = normalize(userText);
+    const userText = input;
+    setInput('');
+    addMessage({ type: 'user', content: userText });
 
-  setInput('');
-  addMessage({ type: 'user', content: userText });
-
-  /* 1️⃣ GREETING / SUPPORT FIRST */
-  const intent = detectSupportIntent(userText);
-  if (intent) {
-    const reply = getSupportReply(intent);
-    if (reply) {
-      addMessage({ type: 'bot', content: reply });
-      return; // ⛔ STOP HERE
+    // 1. Check intent
+    const intent = detectSupportIntent(userText);
+    if (intent) {
+      const reply = getSupportReply(intent);
+      if (reply) {
+        addMessage({ type: 'bot', content: reply });
+        return;
+      }
     }
-  }
 
-  /* 2️⃣ IGNORE MEANINGLESS SHORT INPUTS */
-  if (normalized.length <= 2) {
-    addMessage({
-      type: 'bot',
-      content: "Could you please tell me what you're looking for? 😊",
-    });
-    return;
-  }
+    // 2. Local Search Service (JSON)
+    const results = searchService(userText);
 
-  /* 3️⃣ PRODUCT SEARCH (ONLY NOW) */
-  const results = searchProducts(userText, language).slice(0, 5);
-  if (results.length > 0) {
-    addMessage({
-      type: 'bot',
-      content: `I found ${results.length} items related to "${userText}":`,
-      products: results,
-    });
-    return;
-  }
+    if (results.length > 0) {
+      // Prioritize FAQ if any
+      const faqResult = results.find(r => r.type === 'faq');
+      if (faqResult) {
+        addMessage({ type: 'bot', content: faqResult.content });
+        return;
+      }
 
-  /* 4️⃣ GEMINI — LAST RESORT ONLY */
-  addMessage({ type: 'bot', content: '🤖 Let me think…' });
+      // Show products
+      addMessage({
+        type: 'bot',
+        content: `I found these items for "${userText}":`,
+        results: results
+      });
+      return;
+    }
 
-  const aiReply = await askGemini(`
-You are a customer support assistant for a supermarket named FreshMart.
-If the user greets, greet back.
-If unsure, suggest asking about products or store timings.
-Keep replies short.
+    // 3. Fallback to Gemini if no local data found (or generic response)
+    // The user wants "answers for every query". If local search fails, we can use Gemini or a default.
+    // Let's use Gemini as a smart fallback but explicitly mention we checked stock.
+    addMessage({ type: 'bot', content: '🤔 Let me check...' });
 
-User: "${userText}"
-`);
+    try {
+      const aiReply = await askGemini(`
+        You are a FreshMart assistant. 
+        User asked: "${userText}". 
+        We couldn't find exact matches in our inventory. 
+        Politely suggest checking the spelling or asking about available categories (Clothing, Electronics, Grocery).
+        Keep it helpful and short.
+      `);
 
-  addMessage({
-    type: 'bot',
-    content: aiReply || "I'm here to help! Try asking about products or store info.",
-  });
-};
-
+      addMessage({
+        type: 'bot',
+        content: aiReply || "I couldn't find that item in our store. Try checking the spelling or ask about our categories!"
+      });
+    } catch (e) {
+      addMessage({
+        type: 'bot',
+        content: "I couldn't find that item. Please try searching for something else."
+      });
+    }
+  };
 
   return (
-    <motion.div className="fixed inset-0 z-50 bg-background flex flex-col">
+    <motion.div className="fixed inset-0 z-50 bg-white text-black flex flex-col font-sans h-screen overflow-hidden">
       {/* Header */}
-      <header className="bg-gradient-fresh text-white p-4 flex justify-between">
+      <header className="bg-primary text-white p-4 flex justify-between items-center shadow-md flex-shrink-0">
         <div className="flex items-center gap-2">
-          <Bot /> <span className="font-semibold">FreshMart AI Assistant</span>
+          <Bot className="w-6 h-6" /> <span className="font-semibold text-lg">FreshMart Assistant</span>
         </div>
-        <button onClick={onClose}><X /></button>
+        <button onClick={onClose} className="p-1 hover:bg-white/20 rounded-full transition-colors"><X /></button>
       </header>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Messages - scrollable area with proper flex sizing */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 min-h-0">
         <AnimatePresence>
           {messages.map(msg => (
             <motion.div
@@ -180,19 +192,31 @@ User: "${userText}"
               animate={{ opacity: 1, y: 0 }}
               className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <div className="bg-card rounded-xl p-3 max-w-[75%]">
-                <p>{msg.content}</p>
+              <div
+                className={`rounded-2xl p-4 max-w-[85%] shadow-sm ${msg.type === 'user'
+                  ? 'bg-primary text-white rounded-tr-none'
+                  : 'bg-white text-gray-800 border border-gray-100 rounded-tl-none'
+                  }`}
+              >
+                <p className="leading-relaxed">{msg.content}</p>
 
-                {msg.products && (
-                  <div className="mt-2 space-y-2">
-                    {msg.products.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => { navigate(`/navigate/${p.id}`); onClose(); }}
-                        className="block text-left w-full bg-white rounded p-2"
-                      >
-                        <b>{p.name[language]}</b> — Aisle {p.location.aisle}
-                      </button>
+                {msg.results && msg.results.length > 0 && (
+                  <div className="mt-3 space-y-2">
+                    {msg.results.filter(r => r.type === 'product').map((r, idx) => (
+                      <div key={idx} className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                        {/* We cast data to any because we know it's JsonProduct but TS might complain if strict */}
+                        {r.data && (r.data as any).name ? (
+                          <>
+                            <div className="font-bold text-primary">{(r.data as any).name}</div>
+                            <div className="text-sm text-gray-600">
+                              Price: ₹{(r.data as any).price} | Aisle {(r.data as any).aisle} ({(r.data as any).shelf})
+                            </div>
+                            <div className="text-xs text-gray-500 mt-1">{(r.data as any).description}</div>
+                          </>
+                        ) : (
+                          <div className="text-sm">{r.content}</div>
+                        )}
+                      </div>
                     ))}
                   </div>
                 )}
@@ -202,20 +226,20 @@ User: "${userText}"
         </AnimatePresence>
       </div>
 
-      {/* Input */}
-      <div className="p-4 border-t flex gap-2">
+      {/* Input - pinned to bottom */}
+      <div className="p-4 bg-white border-t border-gray-100 flex gap-2 flex-shrink-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && handleSend()}
-          placeholder="Ask anything..."
-          className="flex-1 px-4 py-3 rounded-full bg-muted"
+          placeholder="Ask about products, store timings..."
+          className="flex-1 px-5 py-3 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-black placeholder:text-gray-400"
         />
         <button
           onClick={handleSend}
-          className="w-12 h-12 bg-primary rounded-full text-white flex items-center justify-center"
+          className="w-12 h-12 bg-primary hover:bg-green-600 rounded-full text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
         >
-          <Send />
+          <Send className="w-5 h-5" />
         </button>
       </div>
     </motion.div>

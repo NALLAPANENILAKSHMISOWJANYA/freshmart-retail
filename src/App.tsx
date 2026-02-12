@@ -9,6 +9,7 @@ import HomePage from "@/pages/HomePage";
 import CategoryPage from "@/pages/CategoryPage";
 import NavigationPage from "@/pages/NavigationPage";
 import SearchPage from "@/pages/SearchPage";
+import ChatPage from "@/pages/ChatPage";
 import NotFound from "./pages/NotFound";
 import BottomNav from "@/components/BottomNav";
 
@@ -33,6 +34,7 @@ const App = () => (
                   <Route path="/category/:id" element={<CategoryPage />} />
                   <Route path="/navigate/:id" element={<NavigationPage />} />
                   <Route path="/search" element={<SearchPage />} />
+                  <Route path="/chat" element={<ChatPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </div>

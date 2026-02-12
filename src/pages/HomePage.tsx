@@ -5,7 +5,6 @@ import { ArrowRight, Star } from 'lucide-react';
 import { categories } from '@/data/products';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Header from '@/components/Header';
-import Chatbot from '@/components/Chatbot';
 
 const HomePage = () => {
   const { language } = useLanguage();
@@ -129,37 +128,12 @@ const HomePage = () => {
         </div>
       </main>
 
-      {/* Chatbot (Preserved) */}
-      <AnimatePresence>
-        {!showChat && (
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            className="fixed bottom-24 right-6 z-40"
-          >
-            <button
-              onClick={() => setShowChat(true)}
-              className="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center hover:scale-110 transition duration-300"
-            >
-              <MessageCircle size={24} fill="white" />
-            </button>
-          </motion.div>
-        )}
-
-        {showChat && (
-          <motion.div
-            className="fixed inset-0 z-50 bg-background flex flex-col"
-          >
-            <Chatbot onClose={() => setShowChat(false)} />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Removed chatbot modal - now using smart search in header */}
 
       {/* Note: BottomNav is already in App.tsx */}
     </div>
   );
 };
-import { MessageCircle } from 'lucide-react'; // Added import
+
 
 export default HomePage;

@@ -1,0 +1,40 @@
+[
+{"barcode":"900000000001","name":"Men Cotton T-Shirt","category":"Clothing","price":499,"discount":"10%","availability":"In Stock","aisle":10,"shelf":"Middle","description":"Comfortable cotton t-shirt for daily wear"},
+{"barcode":"900000000002","name":"Women Denim Jeans","category":"Clothing","price":1199,"discount":"15%","availability":"In Stock","aisle":10,"shelf":"Bottom","description":"Slim-fit denim jeans"},
+{"barcode":"900000000003","name":"Kids Hoodie","category":"Clothing","price":699,"discount":"No discount","availability":"In Stock","aisle":10,"shelf":"Top","description":"Warm hoodie for kids"},
+
+{"barcode":"900000000010","name":"Stainless Steel Plate","category":"Utensils","price":180,"discount":"No discount","availability":"In Stock","aisle":11,"shelf":"Middle","description":"Durable steel dinner plate"},
+{"barcode":"900000000011","name":"Pressure Cooker 5L","category":"Utensils","price":1899,"discount":"10%","availability":"In Stock","aisle":11,"shelf":"Bottom","description":"Aluminium pressure cooker"},
+
+{"barcode":"900000000020","name":"Bluetooth Headphones","category":"Electronics","price":2499,"discount":"20%","availability":"In Stock","aisle":12,"shelf":"Top","description":"Wireless over-ear headphones"},
+{"barcode":"900000000021","name":"Smart LED Bulb","category":"Electronics","price":599,"discount":"No discount","availability":"In Stock","aisle":12,"shelf":"Middle","description":"WiFi enabled LED bulb"},
+
+{"barcode":"900000000030","name":"Lakme Face Cream","category":"Makeup & Beauty","price":325,"discount":"5%","availability":"In Stock","aisle":13,"shelf":"Middle","description":"Moisturizing face cream"},
+{"barcode":"900000000031","name":"Maybelline Lipstick","category":"Makeup & Beauty","price":499,"discount":"10%","availability":"In Stock","aisle":13,"shelf":"Top","description":"Matte finish lipstick"},
+
+{"barcode":"900000000040","name":"Basmati Rice 5kg","category":"Food Items","price":680,"discount":"8%","availability":"In Stock","aisle":1,"shelf":"Bottom","description":"Premium basmati rice"},
+{"barcode":"900000000041","name":"Wheat Atta 5kg","category":"Food Items","price":320,"discount":"10%","availability":"In Stock","aisle":1,"shelf":"Bottom","description":"Whole wheat flour"},
+
+{"barcode":"900000000050","name":"Potato Chips","category":"Snacks","price":20,"discount":"No discount","availability":"In Stock","aisle":2,"shelf":"Middle","description":"Salted potato chips"},
+{"barcode":"900000000051","name":"Mixture Snack","category":"Snacks","price":95,"discount":"5%","availability":"In Stock","aisle":2,"shelf":"Bottom","description":"Spicy Indian mixture"},
+
+{"barcode":"900000000060","name":"Coca Cola 1L","category":"Cool Drinks","price":65,"discount":"No discount","availability":"In Stock","aisle":3,"shelf":"Bottom","description":"Carbonated soft drink"},
+{"barcode":"900000000061","name":"Sprite 750ml","category":"Cool Drinks","price":55,"discount":"No discount","availability":"In Stock","aisle":3,"shelf":"Bottom","description":"Lemon flavored drink"},
+
+{"barcode":"900000000070","name":"Chicken Breast 1kg","category":"Fresh Meat","price":320,"discount":"No discount","availability":"Fresh Stock","aisle":4,"shelf":"Bottom","description":"Fresh chicken meat"},
+{"barcode":"900000000071","name":"Mutton Curry Cut 1kg","category":"Fresh Meat","price":780,"discount":"No discount","availability":"Limited Stock","aisle":4,"shelf":"Bottom","description":"Fresh goat meat"},
+
+{"barcode":"900000000080","name":"Dairy Milk Chocolate","category":"Chocolates","price":40,"discount":"No discount","availability":"In Stock","aisle":5,"shelf":"Top","description":"Milk chocolate bar"},
+{"barcode":"900000000081","name":"KitKat","category":"Chocolates","price":35,"discount":"No discount","availability":"In Stock","aisle":5,"shelf":"Top","description":"Chocolate wafer"},
+
+{"barcode":"900000000090","name":"Tomato 1kg","category":"Vegetables","price":35,"discount":"No discount","availability":"Fresh Stock","aisle":6,"shelf":"Bottom","description":"Fresh red tomatoes"},
+{"barcode":"900000000091","name":"Potato 1kg","category":"Vegetables","price":30,"discount":"No discount","availability":"Fresh Stock","aisle":6,"shelf":"Bottom","description":"Farm fresh potatoes"},
+
+{"barcode":"900000000100","name":"Apple 1kg","category":"Fruits","price":180,"discount":"5%","availability":"Fresh Stock","aisle":7,"shelf":"Bottom","description":"Fresh red apples"},
+{"barcode":"900000000101","name":"Banana 1 dozen","category":"Fruits","price":60,"discount":"No discount","availability":"Fresh Stock","aisle":7,"shelf":"Bottom","description":"Ripe bananas"},
+
+{"barcode":"900000000110","name":"Amul Milk 1L","category":"Dairy Foods","price":60,"discount":"No discount","availability":"In Stock","aisle":8,"shelf":"Bottom","description":"Fresh toned milk"},
+{"barcode":"900000000111","name":"Amul Butter 500g","category":"Dairy Foods","price":280,"discount":"No discount","availability":"Limited Stock","aisle":8,"shelf":"Top","description":"Salted butter"}
+]
+
+

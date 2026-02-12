@@ -1,19 +1,21 @@
 
-import { Home, Search, Map as MapIcon, User } from 'lucide-react';
+
+import { Home, Search, Map as MapIcon, User, MessageCircle } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
 const BottomNav = () => {
     const navItems = [
         { icon: Home, label: 'Home', path: '/home' },
         { icon: Search, label: 'Search', path: '/search' },
+        { icon: MessageCircle, label: 'Chat', path: '/chat' },
         { icon: MapIcon, label: 'Map', path: '/navigate/demo' }, // Placeholder for general map
         // { icon: User, label: 'Profile', path: '/profile' },
     ];
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-gradient-to-t from-background via-background/95 to-transparent pointer-events-none pb-safe">
-            <nav className="mx-auto max-w-sm pointer-events-auto">
-                <div className="glass flex items-center justify-around p-2 rounded-full shadow-2xl border border-white/20 dark:border-white/10 backdrop-blur-xl bg-white/70 dark:bg-black/40">
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-3 pb-safe">
+            <nav className="mx-auto max-w-sm">
+                <div className="flex items-center justify-around p-2.5 rounded-full shadow-lg border border-gray-200/80 backdrop-blur-md bg-white/95">
                     {navItems.map(({ icon: Icon, label, path }) => (
                         <NavLink
                             key={path}
