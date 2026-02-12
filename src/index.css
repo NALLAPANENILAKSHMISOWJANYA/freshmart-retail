@@ -2,124 +2,76 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FreshMart Design System - Modern Mall Navigation */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap');
-
 @layer base {
   :root {
-    /* Fresh Green Theme */
-    --background: 120 20% 98%;
-    --foreground: 150 25% 15%;
+    /* FreshMart Palette - Clean & Vibrant */
+    --background: 0 0% 98%;
+    /* Soft White */
+    --foreground: 222 47% 11%;
+    /* Dark Gray Text */
 
     --card: 0 0% 100%;
-    --card-foreground: 150 25% 15%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 150 25% 15%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Primary - Fresh Green */
-    --primary: 142 76% 36%;
-    --primary-foreground: 0 0% 100%;
+    /* Fresh Green Primary */
+    --primary: 158 64% 52%;
+    /* #34d399 (Emerald-400 equivalent for vibrancy) */
+    --primary-foreground: 160 100% 7%;
+    /* Dark Green Text on Primary */
 
-    /* Secondary - Warm Coral */
-    --secondary: 16 85% 60%;
+    --secondary: 160 84% 39%;
+    /* #10b981 (Emerald-500 - Deeper Green) */
     --secondary-foreground: 0 0% 100%;
 
-    /* Muted */
-    --muted: 120 15% 94%;
-    --muted-foreground: 150 10% 45%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    /* Accent - Teal Navigation */
-    --accent: 174 72% 40%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 142 71% 45%;
+    /* #16a34a (Green-600) */
+    --accent-foreground: 142 76% 96%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 120 15% 88%;
-    --input: 120 15% 88%;
-    --ring: 142 76% 36%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 158 64% 52%;
 
     --radius: 1rem;
-
-    /* Custom Colors */
-    --fresh-green: 142 76% 36%;
-    --fresh-green-light: 142 60% 50%;
-    --fresh-green-dark: 142 80% 25%;
-    --coral: 16 85% 60%;
-    --coral-light: 16 90% 70%;
-    --teal: 174 72% 40%;
-    --teal-light: 174 60% 55%;
-    --gold: 45 93% 47%;
-    --purple: 270 60% 55%;
-    --sky: 200 80% 55%;
-    
-    /* Category Colors */
-    --clothing-color: 280 60% 55%;
-    --utensils-color: 25 80% 50%;
-    --electronics-color: 210 80% 50%;
-    --makeup-color: 330 70% 60%;
-    --food-color: 142 60% 45%;
-    --snacks-color: 45 90% 50%;
-    --drinks-color: 195 90% 50%;
-    --meat-color: 0 70% 55%;
-    --chocolate-color: 25 60% 35%;
-    --vegetables-color: 100 60% 45%;
-    --fruits-color: 35 90% 55%;
-    --dairy-color: 200 30% 85%;
-
-    /* Gradients */
-    --gradient-fresh: linear-gradient(135deg, hsl(142, 76%, 36%) 0%, hsl(174, 72%, 40%) 100%);
-    --gradient-warm: linear-gradient(135deg, hsl(16, 85%, 60%) 0%, hsl(45, 93%, 47%) 100%);
-    --gradient-hero: linear-gradient(180deg, hsl(142, 76%, 36%) 0%, hsl(142, 80%, 25%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(120, 20%, 97%) 100%);
-    
-    /* Shadows */
-    --shadow-sm: 0 2px 8px -2px hsl(150, 20%, 20%, 0.08);
-    --shadow-md: 0 8px 24px -8px hsl(150, 20%, 20%, 0.12);
-    --shadow-lg: 0 16px 48px -16px hsl(150, 20%, 20%, 0.15);
-    --shadow-glow: 0 0 40px -10px hsl(142, 76%, 36%, 0.4);
-    --shadow-card-hover: 0 20px 40px -15px hsl(150, 20%, 20%, 0.2);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Rounded friendly feel */
   }
 
   .dark {
-    --background: 150 20% 8%;
-    --foreground: 120 20% 95%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
 
-    --card: 150 15% 12%;
-    --card-foreground: 120 20% 95%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 150 15% 12%;
-    --popover-foreground: 120 20% 95%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 142 70% 45%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 158 64% 52%;
+    --primary-foreground: 160 100% 10%;
 
-    --secondary: 16 75% 55%;
+    --secondary: 160 84% 39%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 150 15% 18%;
-    --muted-foreground: 120 10% 60%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
 
-    --accent: 174 65% 45%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 70% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
 
-    --border: 150 15% 20%;
-    --input: 150 15% 20%;
-    --ring: 142 70% 45%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 158 64% 52%;
   }
 }
 
@@ -128,305 +80,20 @@
     @apply border-border;
   }
 
-  html {
-    font-family: 'Poppins', sans-serif;
-    scroll-behavior: smooth;
-  }
-
   body {
-    @apply bg-background text-foreground antialiased;
-  }
-
-  /* Telugu Font */
-  .font-telugu {
-    font-family: 'Noto Sans Telugu', 'Poppins', sans-serif;
-  }
-
-  /* Hindi Font */
-  .font-hindi {
-    font-family: 'Noto Sans Devanagari', 'Poppins', sans-serif;
-  }
-}
-
-@layer components {
-  /* Fresh Glass Effect */
-  .glass {
-    @apply bg-white/80 backdrop-blur-xl border border-white/50;
-  }
-
-  /* Category Card Styles */
-  .category-card {
-    @apply relative overflow-hidden rounded-2xl p-6 transition-all duration-500 cursor-pointer;
-    @apply hover:scale-[1.02] hover:-translate-y-1;
-    box-shadow: var(--shadow-md);
-  }
-
-  .category-card:hover {
-    box-shadow: var(--shadow-card-hover);
-  }
-
-  /* Product Card */
-  .product-card {
-    @apply relative bg-card rounded-xl p-4 transition-all duration-300;
-    @apply hover:shadow-lg hover:-translate-y-0.5;
-    box-shadow: var(--shadow-sm);
-  }
-
-  /* Navigation Button */
-  .nav-button {
-    @apply flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all duration-300;
-    @apply bg-primary text-primary-foreground hover:shadow-lg;
-  }
-
-  /* Search Input */
-  .search-input {
-    @apply w-full px-5 py-3.5 rounded-full border-2 border-transparent bg-muted;
-    @apply focus:border-primary focus:bg-white focus:outline-none transition-all duration-300;
-    @apply placeholder:text-muted-foreground;
-  }
-
-  /* Map Container */
-  .map-container {
-    @apply relative rounded-2xl overflow-hidden bg-gradient-to-br from-green-50 to-teal-50;
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Pulse Animation for Location */
-  .location-pulse {
-    @apply relative;
-  }
-
-  .location-pulse::after {
-    content: '';
-    @apply absolute inset-0 rounded-full bg-primary animate-ping opacity-30;
-  }
-
-  /* Chatbot Bubble */
-  .chat-bubble {
-    @apply px-4 py-3 rounded-2xl max-w-[85%];
-  }
-
-  .chat-bubble-user {
-    @apply bg-primary text-primary-foreground rounded-br-md ml-auto;
-  }
-
-  .chat-bubble-bot {
-    @apply bg-muted text-foreground rounded-bl-md;
-  }
-
-  /* Language Toggle */
-  .lang-toggle {
-    @apply px-4 py-2 rounded-full text-sm font-medium transition-all duration-300;
-    @apply hover:bg-primary/10;
-  }
-
-  .lang-toggle.active {
-    @apply bg-primary text-primary-foreground;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    /* Modern Font */
   }
 }
 
 @layer utilities {
-  /* Gradient Text */
-  .text-gradient-fresh {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-fresh);
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 
-  .text-gradient-warm {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-warm);
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
-
-  /* Background Gradients */
-  .bg-gradient-fresh {
-    background: var(--gradient-fresh);
-  }
-
-  .bg-gradient-warm {
-    background: var(--gradient-warm);
-  }
-
-  .bg-gradient-hero {
-    background: var(--gradient-hero);
-  }
-
-  /* Shadows */
-  .shadow-fresh {
-    box-shadow: var(--shadow-md);
-  }
-
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
-  }
-
-  /* Animation Delays */
-  .delay-100 { animation-delay: 100ms; }
-  .delay-200 { animation-delay: 200ms; }
-  .delay-300 { animation-delay: 300ms; }
-  .delay-400 { animation-delay: 400ms; }
-  .delay-500 { animation-delay: 500ms; }
-}
-
-/* Custom Animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes bounce-gentle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes pulse-ring {
-  0% {
-    transform: scale(0.8);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(2deg);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px hsl(142, 76%, 36%, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px hsl(142, 76%, 36%, 0.6);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out forwards;
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out forwards;
-}
-
-.animate-scale-in {
-  animation: scale-in 0.5s ease-out forwards;
-}
-
-.animate-slide-up {
-  animation: slide-up 0.5s ease-out forwards;
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 0.4s ease-out forwards;
-}
-
-.animate-bounce-gentle {
-  animation: bounce-gentle 2s ease-in-out infinite;
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 1.5s ease-out infinite;
-}
-
-.animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.animate-float {
-  animation: float 4s ease-in-out infinite;
-}
-
-.animate-glow {
-  animation: glow 2s ease-in-out infinite;
-}
-
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-muted rounded-full;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-primary/30 rounded-full hover:bg-primary/50 transition-colors;
-}
-
-/* Selection */
-::selection {
-  @apply bg-primary/20 text-foreground;
 }
